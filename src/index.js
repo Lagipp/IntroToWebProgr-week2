@@ -39,7 +39,6 @@ submitBtn.addEventListener("click", (e) => {
 
 emptyBtn.addEventListener("click", () => {
   console.log(tbody.children);
-  //for (let child of tbody.children) tbody.removeChild(child);
-  while (tbody.hasChildNodes) tbody.removeChild(tbody.lastChild);
+  while (tbody.lastChild) tbody.removeChild(tbody.lastChild);
   console.log(tbody.children);
 });

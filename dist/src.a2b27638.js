@@ -207,8 +207,7 @@ submitBtn.addEventListener("click", function (e) {
 });
 emptyBtn.addEventListener("click", function () {
   console.log(tbody.children);
-  //for (let child of tbody.children) tbody.removeChild(child);
-  while (tbody.hasChildNodes) tbody.removeChild(tbody.lastChild);
+  while (tbody.lastChild) tbody.removeChild(tbody.lastChild);
   console.log(tbody.children);
 });
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
