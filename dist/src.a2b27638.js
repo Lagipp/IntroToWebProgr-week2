@@ -187,47 +187,50 @@ var submitBtn = document.querySelector("#submit-data");
 var emptyBtn = document.querySelector("#empty-table");
 var tbody = document.querySelector(".tableBody");
 var tableRows = tbody.querySelectorAll("tr");
-console.log("tr-list length: ".concat(tableRows.length));
+var rows = [];
+var _iterator = _createForOfIteratorHelper(tableRows),
+  _step;
+try {
+  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    var row = _step.value;
+    rows.push(row);
+  }
+} catch (err) {
+  _iterator.e(err);
+} finally {
+  _iterator.f();
+}
+console.log("tr-list length: ".concat(rows.length));
 
 /* adding the new data from the form to the table */
 submitBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  var _iterator = _createForOfIteratorHelper(tableRows),
-    _step;
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var row = _step.value;
-      if (row.firstElementChild.innerHTML === username.value) {
-        console.log("= USERNAME FOUND IN DATABASE");
-        /*console.log(row.children);
-        console.log(`0th ` + row.children[0].innerHTML);
-        console.log(`1st ` + row.children[1].innerHTML);
-        console.log(`2nd ` + row.children[2].innerHTML);
-        console.log(`4th ` + row.children[3].innerHTML);*/
+  for (var _i = 0, _rows = rows; _i < _rows.length; _i++) {
+    var row = _rows[_i];
+    if (row.firstElementChild.innerHTML === username.value) {
+      console.log("= USERNAME FOUND IN DATABASE");
+      /*console.log(row.children);
+      console.log(`0th ` + row.children[0].innerHTML);
+      console.log(`1st ` + row.children[1].innerHTML);
+      console.log(`2nd ` + row.children[2].innerHTML);
+      console.log(`4th ` + row.children[3].innerHTML);*/
 
-        row.children[0].innerHTML = username.value;
-        row.children[1].innerHTML = email.value;
-        row.children[2].innerHTML = address.value;
-        row.children[3].innerHTML = admin.checked ? "X" : "-";
-
-        //console.log(`if-check complete`);
-
-        username.value = "";
-        email.value = "";
-        address.value = "";
-        admin.checked = false;
-        return;
-      }
+      row.children[0].innerHTML = username.value;
+      row.children[1].innerHTML = email.value;
+      row.children[2].innerHTML = address.value;
+      row.children[3].innerHTML = admin.checked ? "X" : "-";
+      console.log("rows length: " + rows.length);
+      username.value = "";
+      email.value = "";
+      address.value = "";
+      admin.checked = false;
+      return;
     }
-
-    // console.log(`after if-check`);
-
-    //console.log(`${username.value} ${email.value} ${address.value} ${admin.checked}`);
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
   }
+
+  // console.log(`after if-check`);
+
+  //console.log(`${username.value} ${email.value} ${address.value} ${admin.checked}`);
   var newTr = document.createElement("tr");
   var tdUsername = document.createElement("td");
   var tdEmail = document.createElement("td");
@@ -241,7 +244,9 @@ submitBtn.addEventListener("click", function (e) {
   newTr.appendChild(tdEmail);
   newTr.appendChild(tdAddress);
   newTr.appendChild(tdAdmin);
+  rows.push(newTr);
   tbody.appendChild(newTr);
+  console.log("rows length: " + rows.length);
 
   /* clearing the input fields after submitting */
   username.value = "";
@@ -252,9 +257,7 @@ submitBtn.addEventListener("click", function (e) {
 
 /* removing every child element of table body (clearing the table) */
 emptyBtn.addEventListener("click", function () {
-  //console.log(tbody.children);
   while (tbody.lastChild) tbody.removeChild(tbody.lastChild);
-  //console.log(tbody.children);
 });
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
