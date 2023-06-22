@@ -176,6 +176,34 @@ module.hot.accept(reloadCSS);
 "use strict";
 
 require("./styles.css");
+var username = document.querySelector("#input-username");
+var email = document.querySelector("#input-email");
+var address = document.querySelector("#input-address");
+var admin = document.querySelector("#input-admin");
+var submitBtn = document.querySelector("#submit-data");
+var tbody = document.querySelector(".tableBody");
+submitBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  //console.log(`${username.value} ${email.value} ${address.value} ${admin.checked}`);
+  var newTr = document.createElement("tr");
+  var tdUsername = document.createElement("td");
+  var tdEmail = document.createElement("td");
+  var tdAddress = document.createElement("td");
+  var tdAdmin = document.createElement("td");
+  tdUsername.textContent = username.value;
+  tdEmail.textContent = email.value;
+  tdAddress.textContent = address.value;
+  tdAdmin.textContent = admin.checked ? "X" : "-";
+  newTr.appendChild(tdUsername);
+  newTr.appendChild(tdEmail);
+  newTr.appendChild(tdAddress);
+  newTr.appendChild(tdAdmin);
+  tbody.appendChild(newTr);
+  username.value = "";
+  email.value = "";
+  address.value = "";
+  admin.checked = false;
+});
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
