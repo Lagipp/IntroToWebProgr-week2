@@ -181,6 +181,7 @@ var email = document.querySelector("#input-email");
 var address = document.querySelector("#input-address");
 var admin = document.querySelector("#input-admin");
 var submitBtn = document.querySelector("#submit-data");
+var emptyBtn = document.querySelector("#empty-table");
 var tbody = document.querySelector(".tableBody");
 submitBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -203,6 +204,12 @@ submitBtn.addEventListener("click", function (e) {
   email.value = "";
   address.value = "";
   admin.checked = false;
+});
+emptyBtn.addEventListener("click", function () {
+  console.log(tbody.children);
+  //for (let child of tbody.children) tbody.removeChild(child);
+  while (tbody.hasChildNodes) tbody.removeChild(tbody.lastChild);
+  console.log(tbody.children);
 });
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

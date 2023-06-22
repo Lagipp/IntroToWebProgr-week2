@@ -6,6 +6,8 @@ const address = document.querySelector("#input-address");
 const admin = document.querySelector("#input-admin");
 const submitBtn = document.querySelector("#submit-data");
 
+const emptyBtn = document.querySelector("#empty-table");
+
 const tbody = document.querySelector(".tableBody");
 
 submitBtn.addEventListener("click", (e) => {
@@ -33,4 +35,11 @@ submitBtn.addEventListener("click", (e) => {
   email.value = "";
   address.value = "";
   admin.checked = false;
+});
+
+emptyBtn.addEventListener("click", () => {
+  console.log(tbody.children);
+  //for (let child of tbody.children) tbody.removeChild(child);
+  while (tbody.hasChildNodes) tbody.removeChild(tbody.lastChild);
+  console.log(tbody.children);
 });
