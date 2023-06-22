@@ -176,6 +176,9 @@ module.hot.accept(reloadCSS);
 "use strict";
 
 require("./styles.css");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 var username = document.querySelector("#input-username");
 var email = document.querySelector("#input-email");
 var address = document.querySelector("#input-address");
@@ -183,9 +186,48 @@ var admin = document.querySelector("#input-admin");
 var submitBtn = document.querySelector("#submit-data");
 var emptyBtn = document.querySelector("#empty-table");
 var tbody = document.querySelector(".tableBody");
+var tableRows = tbody.querySelectorAll("tr");
+console.log("tr-list length: ".concat(tableRows.length));
+
+/* adding the new data from the form to the table */
 submitBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  //console.log(`${username.value} ${email.value} ${address.value} ${admin.checked}`);
+  var _iterator = _createForOfIteratorHelper(tableRows),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var row = _step.value;
+      if (row.firstElementChild.innerHTML === username.value) {
+        console.log("= USERNAME FOUND IN DATABASE");
+        /*console.log(row.children);
+        console.log(`0th ` + row.children[0].innerHTML);
+        console.log(`1st ` + row.children[1].innerHTML);
+        console.log(`2nd ` + row.children[2].innerHTML);
+        console.log(`4th ` + row.children[3].innerHTML);*/
+
+        row.children[0].innerHTML = username.value;
+        row.children[1].innerHTML = email.value;
+        row.children[2].innerHTML = address.value;
+        row.children[3].innerHTML = admin.checked ? "X" : "-";
+
+        //console.log(`if-check complete`);
+
+        username.value = "";
+        email.value = "";
+        address.value = "";
+        admin.checked = false;
+        return;
+      }
+    }
+
+    // console.log(`after if-check`);
+
+    //console.log(`${username.value} ${email.value} ${address.value} ${admin.checked}`);
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
   var newTr = document.createElement("tr");
   var tdUsername = document.createElement("td");
   var tdEmail = document.createElement("td");
@@ -200,15 +242,19 @@ submitBtn.addEventListener("click", function (e) {
   newTr.appendChild(tdAddress);
   newTr.appendChild(tdAdmin);
   tbody.appendChild(newTr);
+
+  /* clearing the input fields after submitting */
   username.value = "";
   email.value = "";
   address.value = "";
   admin.checked = false;
 });
+
+/* removing every child element of table body (clearing the table) */
 emptyBtn.addEventListener("click", function () {
-  console.log(tbody.children);
+  //console.log(tbody.children);
   while (tbody.lastChild) tbody.removeChild(tbody.lastChild);
-  console.log(tbody.children);
+  //console.log(tbody.children);
 });
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
