@@ -10,13 +10,16 @@ const emptyBtn = document.querySelector("#empty-table");
 const tbody = document.querySelector(".tableBody");
 
 const tableRows = tbody.querySelectorAll("tr");
-console.log(`tr-list length: ${tableRows.length}`);
+const rows = [];
+for (let row of tableRows) rows.push(row);
+
+console.log(`tr-list length: ${rows.length}`);
 
 /* adding the new data from the form to the table */
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  for (let row of tableRows) {
+  for (let row of rows) {
     if (row.firstElementChild.innerHTML === username.value) {
       console.log(`= USERNAME FOUND IN DATABASE`);
       /*console.log(row.children);
@@ -30,7 +33,7 @@ submitBtn.addEventListener("click", (e) => {
       row.children[2].innerHTML = address.value;
       row.children[3].innerHTML = admin.checked ? "X" : "-";
 
-      //console.log(`if-check complete`);
+      console.log(`rows length: ` + rows.length);
 
       username.value = "";
       email.value = "";
@@ -60,7 +63,11 @@ submitBtn.addEventListener("click", (e) => {
   newTr.appendChild(tdAddress);
   newTr.appendChild(tdAdmin);
 
+  rows.push(newTr);
+
   tbody.appendChild(newTr);
+
+  console.log("rows length: " + rows.length);
 
   /* clearing the input fields after submitting */
   username.value = "";
@@ -71,7 +78,5 @@ submitBtn.addEventListener("click", (e) => {
 
 /* removing every child element of table body (clearing the table) */
 emptyBtn.addEventListener("click", () => {
-  //console.log(tbody.children);
   while (tbody.lastChild) tbody.removeChild(tbody.lastChild);
-  //console.log(tbody.children);
 });
